@@ -1,0 +1,8 @@
+./tests/test_protocol
+protocol: deterministic fixture, round trips, every-byte tamper/truncation, authorization, freshness, replay boundaries passed
+python3 tests/fixture.py
+independent OpenSSL-backed Ed25519 fixture passed
+python3 tests/integration.py
+SKIP UDP integration: socket creation prohibited: [Errno 1] Operation not permitted
+SKIP UDP integration: socket creation prohibited: [Errno 1] Operation not permitted
+configuration checks passed; UDP test/skip results reported above

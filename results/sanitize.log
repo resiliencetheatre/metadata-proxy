@@ -1,0 +1,18 @@
+make clean
+make[1]: Entering directory '/home/tech/laboratory/metadata-proxy'
+rm -f metadata-proxy tests/test_protocol tools/udp-traffic
+make[1]: Leaving directory '/home/tech/laboratory/metadata-proxy'
+make CFLAGS='-O1 -g -std=c11 -Wall -Wextra -Wpedantic -fsanitize=address,undefined -fno-omit-frame-pointer -fno-pie' LDFLAGS='-fsanitize=address,undefined -no-pie' test
+make[1]: Entering directory '/home/tech/laboratory/metadata-proxy'
+cc -D_DEFAULT_SOURCE -Isrc  -O1 -g -std=c11 -Wall -Wextra -Wpedantic -fsanitize=address,undefined -fno-omit-frame-pointer -fno-pie -fsanitize=address,undefined -no-pie -o metadata-proxy src/main.c src/bench.c src/protocol.c src/keys.c src/replay.c -lsodium 
+cc -D_DEFAULT_SOURCE -Isrc  -O1 -g -std=c11 -Wall -Wextra -Wpedantic -fsanitize=address,undefined -fno-omit-frame-pointer -fno-pie -fsanitize=address,undefined -no-pie -o tools/udp-traffic tools/udp-traffic.c -lsodium 
+cc -D_DEFAULT_SOURCE -Isrc  -O1 -g -std=c11 -Wall -Wextra -Wpedantic -fsanitize=address,undefined -fno-omit-frame-pointer -fno-pie -fsanitize=address,undefined -no-pie -o tests/test_protocol tests/test_protocol.c src/protocol.c src/keys.c src/replay.c -lsodium 
+./tests/test_protocol
+protocol: deterministic fixture, round trips, every-byte tamper/truncation, authorization, freshness, replay boundaries passed
+python3 tests/fixture.py
+independent OpenSSL-backed Ed25519 fixture passed
+python3 tests/integration.py
+SKIP UDP integration: socket creation prohibited: [Errno 1] Operation not permitted
+SKIP UDP integration: socket creation prohibited: [Errno 1] Operation not permitted
+configuration checks passed; UDP test/skip results reported above
+make[1]: Leaving directory '/home/tech/laboratory/metadata-proxy'

@@ -1,0 +1,8 @@
+/metadata-proxy
+/tests/test_protocol
+/tools/udp-traffic
+__pycache__/
+*.secret
+*.public
+*.txt
+/wireshark/mdpx.so
